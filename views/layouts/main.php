@@ -36,6 +36,11 @@ AppAsset::register($this);
             'class' => 'navbar-inverse',// navbar-fixed-top',
         ],
     ]);
+    $setting =[
+         ['label' => 'สถานะคอมพิวเตอร์', 'url' => ['/comstatus']],
+         ['label' => 'รยางาน 2', 'url' => ['/site/report2']]
+    ];
+    
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'encodeLabels'=>false,
@@ -44,6 +49,7 @@ AppAsset::register($this);
             ['label' => '<span class="glyphicon glyphicon-globe"></span> เกี่ยวกับ', 'url' => ['/site/about']],
             ['label' => '<span class="glyphicon glyphicon-phone"></span> ติดต่อ', 'url' => ['/site/contact']],
             ['label' => '<span class="glyphicon glyphicon-book"></span> ทดสอบ', 'url' => ['/first1/index']],
+            ['label' => '<span class="glyphicon glyphicon-book"></span> ตรวจสอบ', 'items' => $setting],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
