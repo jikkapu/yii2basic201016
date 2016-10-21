@@ -49,6 +49,7 @@ class Com extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['com_type_id','brand'],'required'],
             [['com_type_id', 'depart_id', 'com_status_id', 'buy_type_id', 'budget_id'], 'integer'],
             [['detail'], 'string'],
             [['accept_date', 'com_date', 'insurance_date', 'create_date', 'update_date', 'discharge_date'], 'safe'],
@@ -63,6 +64,7 @@ class Com extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            
             'com_id' => 'รหัส',
             'com_type_id' => 'ยี่ห้อ',
             'brand' => 'รายละเอียด',

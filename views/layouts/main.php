@@ -46,9 +46,9 @@ AppAsset::register($this);
             ];
               $report = [
                 ['label' => 'รายงานคอมพิวเตอร์', 'url' => ['/reportcomtype']],
-                  ['label' => 'รายงานปัญหาคอมพิวเตอร์', 'url' => ['/reportcomservice']],
-                  ['label' => 'กราฟสรุปจำนวนคอมพิวเตอร์', 'url' => ['/chartcom']]
-              
+                ['label' => 'รายงานปัญหาคอมพิวเตอร์', 'url' => ['/reportcomservice']],
+                ['label' => 'กราฟสรุปจำนวนคอมพิวเตอร์', 'url' => ['/chartcom']],
+                ['label' => 'รายงานคอมพิวเตอร์(pdf)', 'url' => ['/pdftest'],'linkOptions' => ['target' => '_blank']]
             ];
     
     echo Nav::widget([
@@ -56,17 +56,20 @@ AppAsset::register($this);
         'encodeLabels'=>false,
         'items' => [
             ['label' => '<span class="glyphicon glyphicon-home"></span> หน้าแรก', 'url' => ['/site/index']],
-            ['label' => 'ลงทะเบียน', 'items' => $regist],
+            ['label' => 'ลงทะเบียน', 'items' => $regist,'visible'=>Yii::$app->session->has('username')],
+           // ['label' => 'ลงทะเบียน', 'items' => $regist],
             ['label' => 'ระบบรายงาน', 'items' => $report],
             ['label' => '<span class="glyphicon glyphicon-book"></span> ทดสอบ', 'url' => ['/first1/index']],
             ['label' => '<span class="glyphicon glyphicon-book"></span> ตรวจสอบ', 'items' => $setting],
-            Yii::$app->user->isGuest ? (
+            
+            !Yii::$app->session->get('username') ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    'Logout (' . Yii::$app->session->get('username') . ')',
+                        
                     ['class' => 'btn btn-link']
                 )
                 . Html::endForm()
